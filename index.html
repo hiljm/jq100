@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=euc-kr">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+	<meta name="keywords" content="보험, AIA생명, AIA, 생명보험, 보장">
+	<meta name="description" content="AIA생명은 다양한 상품과 서비스로 고객의 니즈를 만족시키기 위해 최선을 다하고 있습니다. 사망보장, 질병, 상해는 물론 은퇴설계에 이르기까지 최적의 맞춤보장을 제공해 드립니다. ">
+	<meta property="og:image" content="http://www.aia.co.kr/content/dam/kr/ko/images/site/og/aia-life.png">
+
+	<title>(무)백세시대 꼭하나 건강보험(갱신형) | AIA</title>
+
+	<link rel="shortcut icon" type="image/x-icon" href="https://www.aia.co.kr/favicon.ico">
+
+	<script src="./js/jquery-3.5.1.min.js"></script>
+	<script src="./js/slick.min.js"></script>
+
+	<script>
+    // 20200813 -s
+    var formTarget;
+    var idx;
+    // 20200813 -e
+    var km;  //1214
+
+    function calc() {
+        $(".popup.calc").show();
+        $(".popup.agree").hide();
+    }
+
+    function complete() {
+        $(".popup.complete").show();
+        $(".popup.agree").hide();
+    }
+
+    (function($) {
+        // 20200813 -s
+        var pCheckTarget;
+        // 20200813 -e
+        var o = {
+            popup: function() {
+                $('[data-role="open_popup"]').on("click", function(e){
+                    var target = $("[data-receive='" + $(this).attr("data-send") + "']");
+                    // 20200813 -s
+                    formTarget = $(this).closest("form");
+                    idx = $("form").index(formTarget) + 1;
+
+                    target.show();
+
+                    if($(this).attr("data-show") == "btn01"){
+                        target.find(".all_check").attr("onclick", "complete()");
+                    } else if($(this).attr("data-show") == "btn02"){
+                        target.find(".all_check").attr("onclick", "calc()");
+                    }
+
+                    pCheckTarget = $(this);
+                    // 20200813 -e
+                    target.show();
+
+                    e.preventDefault();
+                });
+                
+                $(".popup .btn_close").on("click", function(e){
+                    $(this).parents(".popup").hide();
+                    e.preventDefault();
+                });
+            },
+            slick: function() {
+                $(".slick_slide").slick({
+                    dots: true,
+                    infinite: true,
+                    speed: 300,
+                    autoplay: true,
+                    autoplaySpeed: 6000
+                }).on("afterChange", function(n, o, c) {
+                    // 사용되지 않는 코드 블록 (필요 시 여기에 기능 추가)
+                });
+            },
+            event: function() {
+                $(".s01 .text_box ul li button").on("click", function(e) {
+                    var target = $(this).parent();
+                    if (target.hasClass("off")) {
+                        target.removeClass("off");
+                    } else {
+                        target.addClass("off");
+                    }
+                });
+
+                $(".guide_area button").on("click", function(e) {
+                    var target = $(this).parents(".tab").find(".img");
+                    if (target.hasClass("on")) {
+                        target.removeClass("on");
+                    } else {
+                        target.addClass("on");
+                    }
+                });
+
+                /* 20200803 : 추가 */
+                $(".floating .btn01, .floating .btn02").on("click", function(e) {
+                    if ($("#AIA_wrap").hasClass("show")) {
+                        var _this = $(this);
+                        var target = $(".floating");
+                        if (!target.hasClass("on")) {
+                            target.addClass("on");
+                        }
+
+                        $(".floating .calc, .floating .consult").hide();
+                        if (_this.attr("class") == "btn01") {
+                            $(".floating .calc").show();
+                        } else {
+                            $(".floating .consult").show();
+                        }
+
+                        e.preventDefault();
+                    }
+                });
+
+                $(".floating .btn_toggle").on("click", function(e) {
+                    if ($("#AIA_wrap").hasClass("show")) {
+                        var target = $(".floating");
+                        if (target.hasClass("on")) {
+                            target.removeClass("on");
+                        } else {
+                            target.addClass("on");
+                        }
+                        e.preventDefault();
+                    }
+                });
+                /* // 20200803 : 추가 */
+
+                // 20200813 -s
+                $(".popup.event .all_check").on("click", function(e) {
+                    $(".popup.event .agree input[type='checkbox']").prop("checked", true);
+                    e.preventDefault();
+                });
+
+                $(".popup.event .agree input[type='checkbox']").on("click", function(e) {
+                    if ($("#cust_uyn1").is(":checked") && $("#cust_eyn1").is(":checked")) {
+                        // 처리 코드 (필요 시 여기에 추가)
+                    }
+                });
+
+                $(".popup .agree button").on("click", function(e) {
+                    var _this = $(this);
+                    var target = _this.next();
+                    if (_this.hasClass("on")) {
+                        _this.removeClass("on");
+                        target.hide();
+                    } else {
+                        _this.addClass("on");
+                        target.show();
+                    }
+                    e.preventDefault();
+                });
+
+                $(".popup .btn_remind").on("click", function(e) {
+                    $(this).parents(".popup").hide();
+                    pCheckTarget.parents(".db_box").find(".phone input").focus();
+                    e.preventDefault();
+                });
+                // 20200813 -e
+
+                $(".popup.agree .all_check").on("click", function(e) {
+                    $(".popup.agree .agree input[type='checkbox']").prop("checked", true);
+                    e.preventDefault();
+                });
+
+                $(".header .inner .only_mo").on("click", function(e) {
+                    _satellite.track('call_lead_generation', {
+                        product_name: _dl.productInfo.product_name,
+                        full_product_name: _dl.productInfo.full_product_name,
+                        product_category: _dl.productInfo.product_category,
+                        linkName: '상단',
+                        linkText: '전화상담 신청'
+                    });
+                    // document.location.href = 'tel:080-200-6060';
+                });
+
+                $(".s07 .tel").on("click", function(e) {
+                    _satellite.track('call_lead_generation', {
+                        product_name: _dl.productInfo.product_name,
+                        full_product_name: _dl.productInfo.full_product_name,
+                        product_category: _dl.productInfo.product_category,
+                        linkName: '하단',
+                        linkText: '전화상담 신청'
+                    });
+                    // document.location.href = 'tel:080-200-6060';
+                });
+            },
+
+            /* 20200803 : 추가 */
+            scroll: function() {
+                $(window).on("scroll", function() {
+                    var windowTop = $(window).scrollTop();
+                    var guideLine01 = $(".s02").offset().top;
+                    var guideLine02 = $(".s07").offset().top - parseInt($(window).height());
+                    var guideLine03 = $(".guide_area").offset().top;
+
+                    if (windowTop > guideLine01 && windowTop <= guideLine02) {
+                        $("#AIA_wrap").addClass("show");
+                    } else {
+                        $(".floating").removeClass("on");
+                        $("#AIA_wrap").removeClass("show");
+                    }
+
+                    if (windowTop > guideLine02 && windowTop <= guideLine03) {
+                        $(".floating").removeClass("on");
+                        $("#AIA_wrap").removeClass("show");
+                    } else if (windowTop > guideLine03) {
+                        $("#AIA_wrap").addClass("show");
+                    }
+                });
+            },
+            /* // 20200803 : 추가 */
+
+            init: function() {
+                var sChecked = $(window).width() > 900 ? "s2" : "s1";
+                var dChecked = sChecked;
+
+                function imgReplace() {
+                    $("#AIA_wrap img").each(function() {
+                        if (sChecked == "s1") {
+                            $(this).attr("src", $(this).attr("data-mo-src"));
+                        } else {
+                            $(this).attr("src", $(this).attr("data-pc-src"));
+                        }
+                    });
+                }
+
+                imgReplace();
+
+                $(window).on("resize", function() {
+                    sChecked = $(window).width() > 900 ? "s2" : "s1";
+                    if (sChecked != dChecked) {
+                        console.log(12);
+                        imgReplace();
+                        dChecked = sChecked;
+                    }
+                });
+
+                /* 20200803 : 수정 */
+                this.popup(), this.event(), this.slick(), this.scroll();
+                /* // 20200803 : 수정 */
+            }
+        };
+
+        $(function() {
+            o.init();
+        });
+    })(jQuery);
+</script>
+
+
+	<style>
+		@font-face {
+			font-family: "NanumSquareBold";
+			src: url(./font/NanumSquareB.eot);
+			src: url(./font/NanumSquareB.eot?#iefix) format("embedded-opentype"), url(./font/NanumSquareB.woff) format("woff"), url(./font/NanumSquareB.ttf) format("truetype");
+		}
+
+		@font-face {
+			font-family: "NanumSquareRegular";src: url(./font/NanumSquareR.eot);src: url(./font/NanumSquareR.eot?#iefix) format("embedded-opentype"), url(./font/NanumSquareR.woff) format("woff"), url(./font/NanumSquareR.ttf) format("truetype");
+		}
+
+		html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p,input,button,th,td,select,textarea { margin: 0; padding: 0; box-sizing: border-box; }
+		body,a,input,button,select,strong,textarea { color: #000; font-family: "NanumSquareRegular","맑은 고딕",Arial,Sans-serif; font-size: 15px; letter-spacing: -1px; word-break: keep-all; }
+		h1,h2,h3,h4,h5,h6 { font-size: 100%; }
+		fieldset,img { border: 0 none; }
+		img { vertical-align: top; }
+		ol,ul { list-style: none; }
+		address { font-style: normal; }
+		button, button[type="button"] { border: 0; cursor: pointer; background:none; }
+		em { font-style: normal; }
+		select { -webkit-border-radius: 0; background: transparent; }
+		input[type="text"] { border: none; color: #464646; }
+		a { text-decoration: none; }
+		h2, h3 { font-weight: normal; }
+		.bold { font-family: "NanumSquareBold"; }
+		input:-ms-input-placeholder { color: #c7c7c7 !important; }
+		input::-webkit-input-placeholder { color: #c7c7c7; }
+		input::-moz-placeholder { color: #c7c7c7; }
+		.hide { position: absolute; left: -9999px; top: -9999px; font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+		.slick-slider {position: relative;display: block;-moz-box-sizing: border-box;box-sizing: border-box;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;-webkit-touch-callout: none;-khtml-user-select: none;-ms-touch-action: pan-y;touch-action: pan-y;-webkit-tap-highlight-color: transparent;}.slick-list {position: relative;display: block;overflow: hidden;margin: 0;padding: 0;}.slick-list:focus {outline: none;}.slick-list.dragging {cursor: pointer;cursor: hand;}.slick-slider .slick-track, .slick-slider .slick-list {-webkit-transform: translate3d(0, 0, 0);-moz-transform: translate3d(0, 0, 0);-ms-transform: translate3d(0, 0, 0);-o-transform: translate3d(0, 0, 0);transform: translate3d(0, 0, 0);}.slick-track {position: relative;top: 0;left: 0;display: block;}.slick-track:before, .slick-track:after {display: table;content: "";}.slick-track:after {clear: both;}.slick-loading .slick-track {visibility: hidden;}.slick-slide {display: none;float: left;height: 100%;min-height: 1px;}[dir="rtl"] .slick-slide {float: right;}.slick-slide img {display: block;}.slick-slide.slick-loading img {display: none;}.slick-slide.dragging img {pointer-events: none;}.slick-initialized .slick-slide {display: block;}.slick-loading .slick-slide {visibility: hidden;}.slick-vertical .slick-slide {display: block;height: auto;border: 1px solid transparent;}.slick-slide img.guide {width: 96%;margin: 2vw auto 0;}.slick-arrow.slick-hidden {display: none;}
+
+		.only_pc, .only_mo { display: none; }
+		.header .inner { text-align: center; }
+		.header a { text-indent: -9999px; }
+
+		.event { background:#f6f6f6; }
+
+		/* 1214 : 개인정보동의 팝업 스타일 전체 변경 */
+		.popup { display: none; }
+		.popup .mask { position: fixed; left: 0; top: 0; right: 0; bottom: 0; background: #000; opacity: 0.7; filter: alpha(opacity=70); z-index: 100; }
+		.popup .popup_content { position: fixed; left: 50%; top: 50%; background: #fff; z-index: 101; }
+		.popup.event button { outline: none; }
+		.popup.event .popup_content { top:40px; width:550px; padding:30px; margin-left:-275px; background:#fff; border:2px solid #d31145; border-radius: 56px; }
+		.popup.event .popup_content .img {width:74%;}
+		.popup.event .popup_content .img img {width:100%;}
+		.popup.event .wrap { padding:0; }
+		.popup.event .wrap .agree { margin-top: 25px; }
+		.popup.event .wrap .agree > div { position: relative;  margin-top: 5px;  }
+		.popup.event .wrap .agree input { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+		.popup.event .wrap .agree label { display:block; height:34px; padding-left: 27px; background: url("./images/c20200811_popup_radio_off.png") no-repeat left 0 top 7px / 20px auto; }
+		.popup.event .wrap .agree label img { position:relative; top:9px; height:20px; }
+		.popup.event .wrap .agree input:checked + label { background-image: url("./images/c20200811_popup_radio_on.png"); }
+		.popup.event .wrap .agree button { display:inline-block; position: absolute; right: 0; top:0; width:90px; height:34px; text-indent:-9999px; background: url("./images/c20200811_popup_btn_agree_off.png") no-repeat 0 0 / 100% auto; }
+		.popup.event .wrap .agree button.on { background-image: url("./images/c20200811_popup_btn_agree_on.png"); }
+		.popup.event .wrap .agree button img { height: 100%; }
+		.popup.event .wrap .agree .toggle { display:none; height:120px; margin:6px 0 10px; border:2px solid #dfdfdf; overflow:auto; }
+		.popup.event .wrap .agree .toggle img { width:100%; }
+		.popup.event .wrap .all_check { margin-top:15px; }
+		.popup.event .wrap .all_check,
+		.popup.event .wrap .all_check img { width:100%; }
+		.popup.event .wrap .btn_area .btn_result { display:none; }
+		.popup.event .wrap .btn_area { margin-top:18px; padding-bottom:36px; }
+		.popup.event .wrap .btn_area:after { content:""; display:block; clear:both; }
+		.popup.event .wrap .btn_area a { display:block; float:right; width:218px; }
+		.popup.event .wrap .btn_area a.btn01,
+		.popup.event .wrap .btn_area a.btn02 { float:left; }
+		.popup.event .wrap .btn_area a img { width:100%; }
+		.popup.event .wrap .btn_area .btn01 { display:none; }
+		.popup.event .btn_close { display:block; position:absolute; top:25px; right:30px; width:25px; height:25px;  }
+		.popup.event .btn_close img { width:100%; }
+		/* // 1214 : 개인정보동의 팝업 스타일 전체 변경 */
+		/*
+		.popup { display: none; }
+		.popup .mask { position: fixed; left: 0; top: 0; right: 0; bottom: 0; background: #000; opacity: 0.7; filter: alpha(opacity=70); z-index: 100; }
+		.popup .popup_content { position: fixed; left: 50%; top: 50%; background: #fff; z-index: 101; }
+		.popup.event .popup_content { top:40px; width:477px; margin-left:-238px; }
+		.popup.event .wrap { padding:0 18px; }
+		.popup.event .wrap .agree { margin-top: 10px; }
+		.popup.event .wrap .agree > div { position: relative;  margin-top: 5px;  }
+		.popup.event .wrap .agree input { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+		.popup.event .wrap .agree label { display:block; height:34px; padding-left: 27px; background: url("./images/c20200811_popup_radio_off.png") no-repeat left 0 top 7px / 20px auto; }
+		.popup.event .wrap .agree label img { position:relative; top:9px; height:17px; }
+		.popup.event .wrap .agree input:checked + label { background-image: url("./images/c20200811_popup_radio_on.png"); }
+		.popup.event .wrap .agree button { display:inline-block; position: absolute; right: 0; top:0; width:90px; height:34px; text-indent:-9999px; background: url("./images/c20200811_popup_btn_agree_off.png") no-repeat 0 0 / 100% auto; }
+		.popup.event .wrap .agree button.on { background-image: url("./images/c20200811_popup_btn_agree_on.png"); }
+		.popup.event .wrap .agree button img { height: 100%; }
+		.popup.event .wrap .agree .toggle { display:none; height:90px; margin:6px 0 10px; border:2px solid #dfdfdf; overflow:auto; }
+		.popup.event .wrap .agree .toggle img { width:100%; }
+		.popup.event .wrap .btn_area .btn_result { display:none; }
+		.popup.event .wrap .btn_area { margin-top:18px; padding-bottom:36px; }
+		.popup.event .wrap .btn_area:after { content:""; display:block; clear:both; }
+		.popup.event .wrap .btn_area a { display:block; float:right; width:218px; }
+		.popup.event .wrap .btn_area a.btn01,
+		.popup.event .wrap .btn_area a.btn02 { float:left; }
+		.popup.event .wrap .btn_area a img { width:100%; }
+		.popup.event .wrap .btn_area .btn01 { display:none; }
+		.popup.event .btn_close { display:block; position:absolute; top:8px; right:8px; width:38px; height:38px;  }
+		.popup.event .btn_close img { width:100%; }
+		*/
+
+
+		.popup { display: none; }
+		.popup .mask { position: fixed; left: 0; top: 0; right: 0; bottom: 0; background: #000; opacity: 0.7; filter: alpha(opacity=70); z-index: 100; }
+		.popup .popup_content { position: fixed; left: 50%; top: 50%; background: #fff; z-index: 101; }
+		.popup.agree button { outline: none; }
+		.popup.agree .popup_content { width:800px; height:900px; padding:30px; margin-left:-400px; margin-top:-450px; background:#fff; border:4px solid #d31145; border-radius: 56px; }
+		.popup.agree .wrap { padding:0; }
+		.popup.agree .wrap .agree { margin-top: 25px; }
+		.popup.agree .wrap .agree > div { position: relative;  margin-top: 5px;  }
+		.popup.agree .wrap .agree input { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+		.popup.agree .wrap .agree label { display:block; height:42px; padding-left: 36px; background: url("./images/w20210311_popup_radio_off.png") no-repeat left 0 top 7px / 24px auto; }
+		.popup.agree .wrap .agree label img { position:relative; top:9px; height:20px; }
+		.popup.agree .wrap .agree input:checked + label { background-image: url("./images/c20211029_popup_radio_on.png"); }
+		.popup.agree .wrap .agree .toggle { height:382px; margin:6px 0 10px; background:#f6f6f6; overflow:auto; }
+		.popup.agree .wrap .agree .toggle img { width:100%; }
+		.popup.agree .wrap .all_check { margin-top:15px; }
+		.popup.agree .wrap .all_check,
+		.popup.agree .wrap .all_check img { width:100%; }
+		.popup.agree .btn_close { display:block; position:absolute; top:25px; right:30px; width:25px; height:25px;  }
+		.popup.agree .btn_close img { width:100%; }
+
+		.popup.type02 .popup_content { border-top: 25px solid #dc3e69; text-align: center; }
+		.popup.type02 .popup_content h2 { margin-top: 50px; padding-top: 70px; background: url("./images/w20210311_popup_icon01.png") no-repeat center 0; }
+		.popup.type02 .popup_content p.text { margin-top: 22px; font-size: 20px; line-height: 26px; padding: 0 5px; }
+		.popup.type02 .popup_content p.text span { color: #dc3e69; }
+		.popup.type02 .popup_content p.guide { margin-top: 28px; font-size: 18px; color:#7f7f7f; }
+		.popup.comp .popup_content { width: 512px; height: 406px; margin-top: -203px; margin-left: -256px; }
+		.popup.comp .popup_content h2 { font-size: 42px; }
+		.popup.comp .popup_content h2 span { color:#dc3e69; }
+		.popup.comp .btn_close { position: absolute; top: 12px; right: 12px; }
+		.popup.calc .popup_content { width: 512px; height: 406px; margin-top: -203px; margin-left: -256px; }
+		.popup.calc .popup_content h2 { font-size: 20px; }
+		.popup.calc .popup_content .calc_area { margin-top: 12px; font-size: 43px; }
+		.popup.calc .popup_content .calc_area span { color: #dc3e69; }
+		.popup.calc .popup_content .calc_area strong { margin: 0 38px; font-size: 42px; color: #dc3e69; }
+		.popup.calc .btn_close { position: absolute; top: 12px; right: 12px; }
+
+		@media screen and (min-width : 901px) {
+			.only_pc { display: block; }
+			.inner { position: relative; width: 1060px; margin: 0 auto; text-align: center; }
+			.header { position: relative; height: 82px; }
+			.header .inner { height: 82px; }
+			.header .inner > img { margin-top: 15px; }
+			.header h1 { position: absolute; left: 0; top: 0; width: 170px; height: 100%; }
+			.header h1 a { display: block; width: 100%; height: 100%; }
+			.s01 { background: #f4f4f4; }
+			.s01 .inner { min-height: 585px; text-align: left; }
+			.s01 .inner:after { content: ""; display: block; clear: both; }
+			.s01 .text_box { float: left; padding-bottom: 40px; }
+			.s01 .title h2 { padding: 30px 0 20px; color: #5e5e5e; font-size: 20px; }
+			.s01 .title h2 em { display: inline-block; }
+			.s01 .title h2 span { float: right; color: #b1b0b0; }
+			.db_box { position: relative; float: right; width: 389px; height: 585px; padding: 40px 30px; background: #d3003b; }
+			.db_box h3 { padding: 45px 0 15px; border-bottom: 1px solid #fff; text-align: center; font-size: 38px; color: #fff; background: url("./images/w20200316_aia_icon02.png") no-repeat center 0; }
+			.db_box input[type="text"] { width: 100%; height: 40px; padding: 0 10px; line-height: 40px; font-size: 20px; border-radius: 3px; background: #fff; }
+			.db_box select { width: 78px; height: 40px; padding: 0 5px; border: none; line-height: 40px; font-size: 20px; border-radius: 5px; background: #fff; }
+			.db_box ul { margin-top: 40px; }
+			.db_box ul li:after { content: ""; display: block; clear: both; }
+			.db_box ul li { position: relative; height: 40px; padding-left: 92px; margin-top: 10px; }
+			.db_box ul li label { position: absolute; top: 0; left: 0; width: 92px; height: 40px; line-height: 40px; color: #fff; font-size: 22px; }
+			/* .db_box ul li.phone input { float: right; width: 156px; } */
+			
+			.db_box ul li.name { display: inline-block;}
+			.db_box ul li.sex { float:right; position:relative; width:65px; height:40px; padding:0;}
+			.db_box ul li.sex input { width:1px; height:1px; overflow:hidden; position:absolute; left:-9999px; }
+			.db_box ul li.sex input + label { position:absolute; top:0; display:block; width:30px; height:40px; font-size:21px; cursor:pointer; }
+			.db_box ul li.sex input:first-child + label { left:0; background: url('./images/w_male_off.png') center no-repeat;  }
+			.db_box ul li.sex input:first-child:checked + label { color:#222; background: url('./images/w_male_on.png') center no-repeat; }
+			.db_box ul li.sex #rn_sex2 + label { left:inherit; right:0; background: url('./images/w_female_off.png') center no-repeat;  }
+			.db_box ul li.sex #rn_sex2:checked + label { left:inherit; right:0; background: url('./images/w_female_on.png') center no-repeat;  }
+			.db_box ul li.sex #rn_sex4 + label { left:inherit; right:0; background: url('./images/w_female_off.png') center no-repeat;  }
+			.db_box ul li.sex #rn_sex4:checked + label { left:inherit; right:0; background: url('./images/w_female_on.png') center no-repeat;  }
+
+
+			
+			.db_box ul li.birth {display: flex; align-items: center;}
+			.db_box ul li.birth span.space {margin: 0 3px; color: #fff;}
+			.db_box ul li.birth span.back_digit {display: flex; align-items: center; width: 50%; color: #d7d7d7; letter-spacing: -3px;font-size: 17px;}
+			.db_box ul li.birth input {width: 45%;}
+			.db_box ul li.birth input:last-child {display: flex; align-items: center; width: 30px; margin-right: 3px; text-align: center; letter-spacing: 0; padding: 0 5px;}
+			.db_box ul li.birth input:last-child::placeholder { color: #bbb;}
+			.db_box ul li.birth input::placeholder {letter-spacing: -2.4px;}
+			
+
+
+			
+			
+			.popup.type02 .popup_content .btn_close {position: absolute;top: 12px;right: 12px;}
+			.popup.type02 .popup_content {border-top: 25px solid #dc3e69;text-align: center;}
+			.popup.type02 .popup_content h2 {margin-top: 50px;padding-top: 70px;background: url("./images/c20200316_aia_pop_icon01.png") no-repeat center 0;}
+			.popup.type02 .popup_content p.text {margin-top: 30px;font-size: 20px;line-height: 26px;padding: 0 5px;}
+			.popup.type02 .popup_content p.text span {color: #dc3e69;}
+			.popup.type02 .popup_content p.guide {margin-top: 16px;font-size: 18px;}
+			.popup.complete .popup_content {width: 512px;height: 406px;margin-top: -203px;margin-left: -256px;}
+			.popup.complete .popup_content h2 {font-size: 42px;}
+			.popup.complete .popup_content h2 span {color: #dc3e69;}
+			.popup.calc .popup_content {width: 512px;height: 406px;margin-top: -203px;margin-left: -256px;}
+			.popup.calc .popup_content h2 {font-size: 20px;}.popup.calc .popup_content .calc_area {margin-top: 12px;font-size: 43px;}
+			.popup.calc .popup_content .calc_area span {color: #dc3e69;}
+			.popup.calc .popup_content .calc_area input {text-align:center;width:172px;margin: 0 15px;font-size: 42px;color: #dc3e69;}
+
+			.popup.nocalc .popup_content {width: 512px;height: 406px;margin-top: -203px;margin-left: -256px;}
+			.popup.nocalc .popup_content h2 {font-size: 20px;}
+			.popup.nocalc .popup_content .calc_area {margin-top: 12px;font-size: 43px;}
+			.popup.nocalc .popup_content .calc_area span {color: #dc3e69;}
+			.popup.nocalc .popup_content .calc_area input {text-align:center;width:172px;margin: 0 15px;font-size: 42px;color: #dc3e69;}
+
+			
+			.db_box .btn_area { margin-top: 40px; }
+			.db_box .btn_area:after { content: ""; display: block; clear: both; }
+			.db_box .btn_area button { display: block; width: 100%; height: 56px; margin-top: 12px; font-size: 26px; color: #fff; line-height: 56px; text-align: center; border-radius: 28px; background: #1d1d1d url("./images/c20200316_aia_icon03.png") no-repeat right 25px top 16px / 24px auto; }
+			.db_box .btn_area button + button { color: #1d1d1d; background-color: #d2d2d2; background-image: url("./images/c20200316_aia_icon04.png"); }
+			.db_box:after { content: ""; display: block; position: absolute; left: -25px; top: 300px; width: 25px; height: 51px; background: url("./images/w20200316_aia_deco01.png") no-repeat 0 0; }
+			.s03, .s05 { background: #fff8fa; }
+			.s07 { background: #d3003b; }
+			.s07 .inner { height: 326px; text-align: left; }
+			.s07 .text_box { position: absolute; top: 80px; left: 56px; }
+			.s07 .text_box h3 { font-size: 24px; color: #fff; }
+			.s07 .text_box h3 span { display: block; margin-top: 10px; font-size: 57px; }
+			.s07 .text_box p { margin-top: 40px; padding-left: 50px; color: #fff; font-size: 29px; background: url("./images/w20200316_aia_icon05.png") no-repeat 0 0; }
+			.s07 .db_box { width: 329px; height: 326px; padding: 0; margin-right: 10px; }
+			.s07 .db_box ul { margin-top:50px; }
+			.s07 .db_box:after { content: ""; display: block; position: absolute; left: -220px; top: -20px; width: 49px; height: 21px; background: url("./images/w20200316_aia_deco02.png") no-repeat 0 0; }
+			.guide_area { }
+			.guide_area * { font-family: "???? ????"; }
+			.guide_area .subTitle { height: 43px; margin-top: 12px; background-color: #c3cbd2; }
+			.guide_area .subTitle .wrap { height: 100%; }
+			.guide_area .subTitle .wrap button { display: block; width: 1040px; height: 100%; margin: 0 auto; text-align: center; background: #c3cbd2; }
+			.guide_area .img { display: none; width: 1040px; margin: 20px auto 0; text-align: center; padding-bottom: 40px; }
+			.guide_area .img.on { display: block; }
+			.footer { background: #2c2c2c; }
+			.footer .inner .pi-link {position: absolute;width: 120px;height: 30px;left: 400px;top: 115px;text-indent: -9999px;}
+		}
+
+		@media screen and (max-width : 900px) {
+			img { width: 100%; border: none; vertical-align: top; }
+			.only_mo { display: block; }
+			.inner { position: relative; width: 100%; }
+			.header .inner { position: relative; height: 14vw; border-bottom: 1px solid #b2b2b2; }
+			.header h1 { position: absolute; left: 0; top: 0; width: 25.5vw; height: 100%; }
+			.header h1 a { display: block; width: 100%; height: 100%; }
+			.header .inner > img { width: 94%; margin-top: 3vw; }
+			.header .tel { display: block; width: 46vw; height: 100%; position: absolute; right: 0; top: 0; }
+			.s01 .title span { position: absolute; top: 0.5vw; right: 2vw; font-size: 2.6666vw; color: #595757; }
+			.s01 .text_box ul { position: absolute; top: 58.1vw; left: 5vw; width: 90vw; }
+			.s01 .text_box ul:after { content: ""; display: block; clear: both; }
+			.s01 .text_box ul li button { display: block; width: 100%; height: 100%; }
+			.s01 .text_box ul li button span { display: inline-block; text-indent: -9999px; }
+			.s01 .text_box ul li { float: left; width: 25%; height: 12.6vw; background: url("./images/m20200316_bt_on_1.png") no-repeat center 0 / 97% auto; }
+			.s01 .text_box ul li + li { background-image: url("./images/m20200316_bt_on_2.png"); }
+			.s01 .text_box ul li + li + li { background-image: url("./images/m20200316_bt_on_3.png"); }
+			.s01 .text_box ul li + li + li + li { background-image: url("./images/m20200316_bt_on_4.png"); }
+			.s01 .text_box ul li + li + li + li + li { background-image: url("./images/m20200316_bt_on_5.png"); }
+			.s01 .text_box ul li + li + li + li + li + li { background-image: url("./images/m20200316_bt_on_6.png"); }
+			.s01 .text_box ul li + li + li + li + li + li + li { background-image: url("./images/m20200316_bt_on_7.png"); }
+			.s01 .text_box ul li + li + li + li + li + li + li + li { background-image: url("./images/m20200316_bt_on_8.png"); }
+			.s01 .text_box ul li.off { background-image: url("./images/m20200316_bt_off_1.png"); }
+			.s01 .text_box ul li + li.off { background-image: url("./images/m20200316_bt_off_2.png"); }
+			.s01 .text_box ul li + li + li.off { background-image: url("./images/m20200316_bt_off_3.png"); }
+			.s01 .text_box ul li + li + li + li.off { background-image: url("./images/m20200316_bt_off_4.png"); }
+			.s01 .text_box ul li + li + li + li + li.off { background-image: url("./images/m20200316_bt_off_5.png"); }
+			.s01 .text_box ul li + li + li + li + li + li.off { background-image: url("./images/m20200316_bt_off_6.png"); }
+			.s01 .text_box ul li + li + li + li + li + li + li.off { background-image: url("./images/m20200316_bt_off_7.png"); }
+			.s01 .text_box ul li + li + li + li + li + li + li + li.off { background-image: url("./images/m20200316_bt_off_8.png"); }
+			.s01 .text_box button { background-color: transparent; }
+			.s01 .db_box h3 { display: none; }
+			.db_box { position: relative; padding: 6.6666vw 0; background: #d3003b; }
+			.db_box input[type="text"] { width: 100%; height: 9.1111vw; padding: 0 10px; line-height: 9.5vw; font-size: 4.6666vw; border-radius: 3px; background: #fff; }
+			.db_box select { width: 18.5555vw; height: 9.1111vw; padding: 0 5px; border: none; line-height: 9.5vw; font-size: 4.6666vw; border-radius: 3px; background: #fff; }
+			.db_box ul { padding: 0 6.5vw; }
+			.db_box ul li { position: relative; width: 100%; height: 9.1111vw; padding-left: 22vw; margin-top: 2.2222vw; }
+			.db_box ul li:first-child { margin-top: 0; }
+			.db_box ul li label { position: absolute; top: 0; left: 0; width: 22vw; height: 9.1111vw; line-height: 9.5vw; color: #fff; font-size: 5.2222vw; }
+			/* .db_box ul li.phone input { float: right; width: 37.5vw; } */
+			.db_box .btn_area { margin-top: 4vw; padding: 0 4%; }
+			.db_box .btn_area:after { content: ""; display: block; clear: both; }
+			.db_box .btn_area button { float: left; width: 49%; height: 14vw; font-size: 6.1111vw; color: #fff; line-height: 14vw; text-align: center; border-radius: 10px; background: #1d1d1d; }
+			.db_box .btn_area button span { padding-right: 8vw; background: url("./images/c20200316_aia_icon03.png") no-repeat right 0 top 0.6vw / 5.7777vw auto; }
+			.db_box .btn_area button + button { float: right; color: #1d1d1d; background-color: #d2d2d2; }
+			.db_box .btn_area button + button span { background-image: url("./images/c20200316_aia_icon04.png"); }
+			
+			
+			.db_box ul li.name { display: inline-block;}
+			.db_box ul li.sex { float:right; position:relative; width:18vw; height:40px; padding:0; margin:0;}
+			.db_box ul li.sex input { width:1px; height:1px; overflow:hidden; position:absolute; left:-9999px; }
+			.db_box ul li.sex input + label { position:absolute; top:0; display:block; width:9vw; font-size:21px; cursor:pointer; float:left;}
+			.db_box ul li.sex input:first-child + label { left:0; background: url('./images/mo_male_off.png') center no-repeat; background-size: 9vw;}
+			.db_box ul li.sex input:first-child:checked + label { color:#222; background: url('./images/mo_male_on.png') center no-repeat; background-size: 9vw;}
+			.db_box ul li.sex #rn_sex2 + label { left:inherit; right:0; background: url('./images/mo_female_off.png') center no-repeat; background-size: 9vw;}
+			.db_box ul li.sex #rn_sex2:checked + label { left:inherit; right:0;  background: url('./images/mo_female_on.png') center no-repeat;  background-size: 9vw;}
+			.db_box ul li.sex #rn_sex4 + label { left:inherit; right:0; background: url('./images/mo_female_off.png') center no-repeat;  background-size: 9vw;}
+			.db_box ul li.sex #rn_sex4:checked + label { left:inherit; right:0;  background: url('./images/mo_female_on.png') center no-repeat;  background-size: 9vw;}
+
+
+
+
+			.db_box ul li.birth {display: flex; align-items: center;}
+			.db_box ul li.birth span.space {margin: 0 1vw; font-size: 3.2vw; color: #fff;}
+			.db_box ul li.birth span.back_digit {display: flex; align-items: center; height: 100%; font-size: 4vw; color: #d7d7d7; letter-spacing: -0.3vw;}
+			.db_box ul li.birth input {width: 45% !important;}
+			.db_box ul li.birth input:last-child {width: 8vw !important; margin-right: 1vw; padding: 0; text-align: center;}
+			.db_box ul li.birth input:last-child::placeholder { color: #bbb;}
+
+			.floating .db_box ul li.birth span.back_digit {letter-spacing: 0; font-size: 4.5vw;}
+			.floating .db_box ul li.birth input:first-child {width: 44.5555vw !important;}
+			.floating .db_box ul li.birth input:last-child {width: 9vw !important;}
+			.floating .db_box ul li.phone {margin-top: 0;}
+
+
+
+			
+			.popup {display: none;}
+			.popup .mask {position: fixed;left: 0;top: 0;right: 0;bottom: 0;background: #000;opacity: 0.7;filter: alpha(opacity=70);z-index: 100;}
+			.popup .popup_content {position: fixed;width:94%;left: 3%;top: 50%;background: #fff;z-index: 101;}
+			.popup .popup_content .btn_close {position: absolute;top: 8px;right: 8px;text-indent:-9999px;width:5vw;height:5vw;background:url("./images/c20200316_aia_pop_btn_close.png") no-repeat 0 0 / 100% auto;}
+			.popup.type02 .popup_content {border-top: 5vw solid #dc3e69;text-align: center;padding-bottom:8vw;}
+			.popup.type02 .popup_content h2 {margin-top: 10vw;padding-top: 14vw;background: url("./images/c20200316_aia_pop_icon01.png") no-repeat center 0 / 11vw auto;}
+			.popup.type02 .popup_content p.text {margin-top: 6vw;font-size: 4vw;line-height: 5.2vw;padding: 0 1vw;}
+			.popup.type02 .popup_content p.text span {color: #dc3e69;}
+			.popup.type02 .popup_content p.guide {margin-top: 3.2vw;font-size: 3.6vw;}
+			.popup.personal01 .popup_content {margin-top:-44vw;}
+			.popup.personal02 .popup_content {margin-top:-41vw;}
+			.popup.complete .popup_content {margin-top:-40vw;}
+			.popup.complete .popup_content h2 {font-size: 8.4vw;}
+			.popup.complete .popup_content h2 span {color: #dc3e69;}
+			.popup.calc .popup_content {margin-top:-40vw;}
+			.popup.calc .popup_content h2 {font-size: 4vw;}
+			.popup.calc .popup_content .calc_area {margin-top: 2.4vw;font-size: 8.6vw;}
+			.popup.calc .popup_content .calc_area span {color: #dc3e69;}
+			.popup.calc .popup_content .calc_area input {text-align:center;margin: 0 3.6vw;font-size: 8.4vw;color: #dc3e69;width:34vw;}
+
+			.popup.nocalc .popup_content {margin-top:-40vw;}
+			.popup.nocalc .popup_content h2 {font-size: 4vw;}
+			.popup.nocalc .popup_content .calc_area {margin-top: 2.4vw;font-size: 8.6vw;}
+			.popup.nocalc .popup_content .calc_area span {color: #dc3e69;}
+			.popup.nocalc .popup_content .calc_area input {text-align:center;margin: 0 3.6vw;font-size: 8.4vw;color: #dc3e69;width:34vw;}
+			
+			.s03 .inner { background: #fff8fa; padding-bottom: 16.1111vw; }
+			.s03 .slick_wrap { padding: 2vw 10.5555vw 0; }
+			.s03 .slick-arrow { position: absolute; top: 0.5vw; right: -10.3vw; width: 10vw; height: 72vw; text-indent: -9999px; background: url("./images/m20200316_right_bt.png") no-repeat center center / 50% auto; }
+			.s03 .slick-prev { right: auto; left: -10.3vw; background-image: url("./images/m20200316_left_bt.png"); }
+			.s03 .slick_slide p { margin-top: 2vw; padding: 0 2vw; font-size: 2.2222vw; }
+			.s03 .slick_slide p span { color: #0010e3; }
+			.s03 .slick_slide .slick-dots { position: absolute; bottom: -8vw; left: 0; width: 100%; text-align: center; z-index: 3; }
+			.s03 .slick_slide .slick-dots li { display: inline-block; }
+			.s03 .slick_slide .slick-dots li button { width: 4vw; height: 4vw; margin: 0 0.5vw; font-size: 0; background: #cfcfcf; box-sizing: border-box; }
+			.s03 .slick_slide .slick-dots li.slick-active button { background: #d3003b; }
+			.s07 .inner { padding: 9.3333vw 0 7.2222vw; background: #d3003b; }
+			.s07 .db_box { padding-bottom: 0; }
+			.s07 .text_box h3 { margin: 0 4.4444vw; padding-bottom: 4.4444vw; border-bottom: 1px solid #fff; text-align: center; font-size: 3.8888vw; color: #fff; }
+			.s07 .text_box h3 span { display: block; margin-top: 1.5vw; font-size: 9.3333vw; letter-spacing: -1.5px; }
+			.s07 .text_box > p { display: none; }
+			.s07 .db_box .btn_area button { width: 100%; }
+			.s07 .inner:after { content: ""; display: block; position: absolute; left: 50%; top: -3.3vw; width: 6.5555vw; height: 3.3333vw; margin-left: -1.6666vw; background: url("./images/m20200316_aia_deco01.png") no-repeat 0 0 / 100% auto; }
+			.s07 .tel { display: block; height: 22.2222vw; line-height: 22.2222vw; text-align: center; background: #ececec; }
+			.s07 .tel span { display: inline-block; padding-left: 14.4444vw; letter-spacing: -1px; font-size: 7.5555vw; color: #d3003b; background: url("./images/c20200316_aia_icon01.png") no-repeat 0 center / 10.5555vw auto; }
+			.guide_area { width: 95%; margin: 10px auto; }
+			.guide_area p.title button { display: block; width: 100%; background-color: #114e84; color: #ffffff; font-size: 15px; padding: 16px; }
+			.guide_area .img { display: none; margin-top: 2vw; }
+			.guide_area .img.on { display: block; }
+			.show .footer { padding-bottom: 23vw; background: #373737; }
+			.footer .inner .pi-link {position: relative;display: inline-block; width: 58vw;height: 10vw;left: 20vw;top: -48vw;text-indent: -9999px;}
+			.footer .inner .pi-link {position: relative;display: inline-block; width: 58vw;height: 10vw;left: 20vw;top: -48vw;text-indent: -9999px;}
+			.floating { position: fixed; left: 0; bottom: 0; width: 100%; background: #fff; z-index: -1; transition: opacity 0.3s; opacity: 0; }
+			.show .floating { opacity: 1; z-index: 20;}
+			.floating .layer { position: absolute; left: 0; bottom: -55vw; height: 67vw; transition: bottom 0.5s; background: #d31145; }
+			.floating.on .layer { bottom: 3vw; }
+			.floating .inner ul li { float: left; width: 50%; }
+			.floating .inner ul:after { content: ""; display: block; clear: both; }
+			.floating .db_box { padding: 4vw; padding-bottom: 6vw; }
+			.floating input[type="text"] { height: 10.4444vw; line-height: 10.6vw; font-size: 5.1111vw; border-radius: 2px; }
+			.floating .db_box ul { margin-top: 0; padding: 0; }
+			.floating .db_box ul:after { content: ""; display: block; clear: both; }
+			.floating .db_box ul li { float: left; padding: 0; height: 10.4444vw; width: auto; }
+			.floating .db_box ul li.phone { float: right; }
+			.floating .db_box ul li input { width: 44.5555vw; padding: 0 10px; font-size: 4.2vw; }
+			.floating .db_box ul li.sex { float: right; position: relative; width: 45.3333vw; height: 10.4444vw; padding: 0; margin-top: 0; }
+			.floating .db_box ul li.sex input { width: 1px; height: 1px; overflow: hidden; position: absolute; left: -9999px; }
+			.floating .db_box ul li.sex input + label { position: absolute; top: 0; left: auto; right: 0; display: block; cursor: pointer; text-align: center; border-radius: 4px; }
+			.floating .db_box ul li.sex input:first-child + label { right: auto; left: 0; }
+			.floating .db_box ul li.sex input + label { width: 22.3333vw; height: 10.5555vw; background: url("./images/m20200803_female_off.png") no-repeat 0 0 / 100% auto; text-indent: -9999px; }
+			.floating .db_box ul li.sex input:first-child + label { background-image: url("./images/m20200803_male_off.png"); }
+			.floating .db_box ul li.sex input:checked + label { background-image: url("./images/m20200803_female_on.png"); }
+			.floating .db_box ul li.sex input:first-child:checked + label { background-size:25vw; background-image: url("./images/m20200803_male_on.png"); }
+			.floating .db_box .btn_area { padding: 0; background: #fff; }
+			.floating .db_box .btn_area:after { content: ""; display: block; clear: both; }
+			.floating .db_box .btn_area button { width: 42%; }
+			.floating .db_box .btn_area .result { float: left; width: 58%; }
+			.floating .db_box .btn_area.calc .result { display: block; }
+			.floating .db_box .btn_area.calc .result { position: relative; }
+			.floating .db_box .btn_area.calc .result input { position: absolute; height: 5.3333vw; font-size: 3.7777vw; line-height: 5.5vw; text-align: center; color: #ff386f; border: 1px solid #d5d5d5; border-radius: 1px; font-family: "NanumSquareBold"; }
+			.floating .db_box .btn_area.calc .result .user_name { left: 2.6666vw; top: 2.1111vw; width: 16.2222vw; }
+			.floating .db_box .btn_area.calc .result .user_premium { left: 12vw; top: 8.6666vw; width: 19.3333vw; }
+			.floating .db_box .btn_area.consult { display: none; }
+			.floating .btn .btn_toggle { position: absolute; top: -5vw; left: 50%; margin-left: -6vw; width: 12vw; height: 5.3333vw; text-indent: -9999px; background: url("./images/m20200617_aia_float_deco01.png") no-repeat 0 0 / 100% auto; }
+			.floating.on .btn .btn_toggle { background-image: url("./images/m20200803_aia_float_deco02.png"); }
+
+			/* 1214 : 개인정보동의 팝업 스타일 전체 변경 */
+			.popup.event .popup_content { width: 93%; left: 3.5%; top: 2%; margin:0; padding:5vw; border-radius: 8vw; }
+			.popup.event .wrap { padding:0; }
+			.popup.event .wrap .agree { margin-top: 3.6666vw; }
+			.popup.event .wrap .agree > div { margin-top: 5px;  }
+			.popup.event .wrap .agree label { height:6.6666vw; padding-left: 5.1111vw; background-position:0 1.5vw; background-size:3.8888vw auto; }
+			.popup.event .wrap .agree label img { top:2vw; width:auto; height:3.3333vw; }
+			.popup.event .wrap .agree button { width:17.5555vw; height:6.6666vw; }
+			.popup.event .wrap .agree .toggle { height:16vw; margin:1.1111vw 0 2.2222vw; border-width:1px; }	
+			.popup.event .wrap .all_check { margin-top:3vw; }
+			.popup.event .wrap .btn_area { margin-top:3.3333vw; padding-bottom:4.4444vw; }
+			.popup.event .wrap .btn_area a { width:42.2222vw; }
+			.popup.event .btn_close { top:3.3333vw; right:3.3333vw; width:5vw; height:5vw;  }
+			/* // 1214 : 개인정보동의 팝업 스타일 전체 변경 */
+			/*
+			.popup.event .popup_content { width: 93%; left: 3.5%; top: 2%; margin:0; }
+			.popup.event .wrap { padding:0 3.3333vw; }
+			.popup.event .wrap .agree { margin-top: 1.6666vw; }
+			.popup.event .wrap .agree > div { margin-top: 5px;  }
+			.popup.event .wrap .agree label { height:6.6666vw; padding-left: 5.1111vw; background-position:0 1.5vw; background-size:3.8888vw auto; }
+			.popup.event .wrap .agree label img { top:2vw; width:auto; height:3.3333vw; }
+			.popup.event .wrap .agree button { width:17.5555vw; height:6.6666vw; }
+			.popup.event .wrap .agree .toggle { height:15vw; margin:1.1111vw 0 2.2222vw; border-width:1px; }	
+			.popup.event .wrap .btn_area { margin-top:3.3333vw; padding-bottom:4.4444vw; }
+			.popup.event .wrap .btn_area a { width:42.2222vw; }
+			.popup.event .btn_close { top:1.3333vw; right:1.3333vw; width:7.1111vw; height:7.1111vw;  }
+			
+			.pop{position:absolute;top:0;left:0;width:100%;height:100%;display:none;z-index:10000;}
+			.pop .bg{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;opacity:.5;filter:alpha(opacity=50);}
+			#layer_pop_back .popup_box {width:94%;position:fixed;top:25%;left:3%}
+			#layer_pop_back .popup_box #link_pop    {position:absolute;left:9%;top:72%; width: 83%; height: 16%;}
+			#layer_pop_back .popup_box #close_pop{position:absolute; top: 5%; right: 4%;width: 5%; height: 7%;}
+			*/
+			
+			
+			.popup { display: none; }
+			.popup .mask { position: fixed; left: 0; top: 0; right: 0; bottom: 0; background: #000; opacity: 0.7; filter: alpha(opacity=70); z-index: 100; }
+			.popup .popup_content { position: fixed; left: 50%; top: 50%; background: #fff; z-index: 101; }
+			.popup.agree button { outline: none; }
+			.popup.agree .popup_content { width: 93%; height:auto; left: 3.5%; top: 2%; margin:0; padding:5vw; border-radius: 8vw; background:#fff; border:2px solid #d31145; }
+			.popup.agree .popup_content .img {width:74%;}
+			.popup.agree .popup_content .img img {width:100%;}
+			.popup.agree .wrap { padding:0; }
+			.popup.agree .wrap .agree { margin-top: 3.6666vw; }
+			.popup.agree .wrap .agree > div { position: relative;  margin-top: 5px;  }
+			.popup.agree .wrap .agree input { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+			.popup.agree .wrap .agree label { display:block; height:6.6666vw; padding-left: 5.1111vw; background: url("./images/w20210311_popup_radio_off.png") no-repeat left 0 top 1.5vw / 3.8888vw auto; }
+			.popup.agree .wrap .agree label img { position:relative; top:2vw; width:auto; height:3.3333vw; }
+			.popup.agree .wrap .agree input:checked + label { background-image: url("./images/c20211029_popup_radio_on.png"); }
+			.popup.agree .wrap .agree .toggle { height:50vw; margin:1.1111vw 0 2.2222vw; border:1px solid #dfdfdf; overflow:auto; }
+			.popup.agree .wrap .agree .toggle img { width:100%; }
+			.popup.agree .wrap .all_check { margin-top:3vw; }
+			.popup.agree .wrap .all_check,
+			.popup.agree .wrap .all_check img { width:100%; }
+			.popup.agree .wrap .btn_area .btn_result { display:none; }
+			.popup.agree .wrap .btn_area { margin-top:3.3333vw; padding-bottom:4.4444vw; }
+			.popup.agree .wrap .btn_area:after { content:""; display:block; clear:both; }
+			.popup.agree .wrap .btn_area a { display:block; float:right; width:42.2222vw; }
+			.popup.agree .btn_close { display:block; position:absolute; top:3.3333vw; right:3.3333vw; width:5vw; height:5vw;  }
+			.popup.agree .btn_close img { width:100%; }
+			
+			.popup.type02 .popup_content { width:94%; left: 3%; top: 50%; height: auto;margin-left: auto;}   
+			.popup.type02 .popup_content { border-top: 5vw solid #dc3e69; text-align: center; padding-bottom:8vw; }
+			.popup.type02 .popup_content h2 { margin-top: 10vw; padding-top: 14vw; background: url("./images/m20210311_popup_icon01.png") no-repeat center 0 / 11vw auto; }
+			.popup.type02 .popup_content p.text { margin-top: 6vw; font-size: 4vw; line-height: 5.2vw; padding: 0 1vw; }
+			.popup.type02 .popup_content p.text span { color: #dc3e69; }
+			.popup.type02 .popup_content p.guide { margin-top: 3.2vw; font-size: 3.6vw; color:#7f7f7f; }
+			.popup.comp .popup_content { margin-top:-40vw; }
+			.popup.comp .popup_content h2 { font-size: 8.4vw; line-height:10vw; }
+			.popup.comp .popup_content h2 span { color:#dc3e69; }
+			.popup.comp .btn_close { position: absolute; top:8px; right: 8px; }
+			.popup.calc .popup_content { margin-top:-40vw; }
+			.popup.calc .popup_content h2 { font-size: 4vw; }
+			.popup.calc .popup_content .calc_area { margin-top: 2.4vw; font-size: 8.6vw; }
+			.popup.calc .popup_content .calc_area span { color: #dc3e69; }
+			.popup.calc .popup_content .calc_area strong { margin: 0 7.6vw; font-size: 8.4vw; color: #dc3e69; }
+			.popup.calc .btn_close { position: absolute; top:8px; right: 8px; }		
+		}
+	</style>
+</head>
+
+<body>
+	<div id="AIA_wrap">
+		<div class="header">
+			<div class="inner">
+				<img src="./images/c20200316_blank.gif" data-pc-src="./images/w20200316_top.png" data-mo-src="./images/m20200316_top.png" alt="">
+				<!-- 20200803 : 수정/추가 -->
+				
+				<h1><a href="../event/aia_gateway_1.jsp?reqProd=AIA001" class="btn_home" data-link-area ="Header" data-link-name="logo" data-link-text="gateway이동">HEALTHIER, LONGER, BETTER LIVES AIA</a></h1>
+				<!-- // 20200803 : 수정/추가 -->
+				<div class="only_mo"><a href="tel:080-200-6060" class="tel">무료상담 080-200-6060</a></div>
+			</div>
+		</div>
+		<div class="contents">
+			<div class="s01">
+				<div class="inner">
+					<div class="text_box">
+						<img src="./images/c20200316_blank.gif" data-pc-src="./images/w20200316_aia_sect01_text01.png" data-mo-src="./images/m20200316_aia_sect01_img01.jpg" alt="하단문구참조">
+						<div class="hide">
+							<h3>내가 원하는 보장만 선택 가능한 나에게 딱 맞춘 보험!</h3>
+							<ul>
+								<li>치매</li>
+								<li>치아</li>
+								<li>입원</li>
+								<li>심장</li>
+								<li>생활비</li>
+								<li>수술</li>
+								<li>암</li>
+								<li>뇌질환</li>
+							</ul>
+							<p>진단비, 수술비, 입원비, 생활비, 간병비 등 필요한 보장만 골라 편리하게 구성! (특약 가입시)</p>
+						</div>
+						<ul class="only_mo">
+                            <li><button><span>치매</span></button></li>
+                            <li><button><span>치아</span></button></li>
+                            <li><button><span>입원</span></button></li>
+                            <li><button><span>심장</span></button></li>
+                            <li><button><span>생활비</span></button></li>
+                            <li><button><span>수술</span></button></li>
+                            <li><button><span>암</span></button></li>
+                            <li><button><span>뇌질환</span></button></li>
+                        </ul>
+					</div>
+					<div class="db_box">
+						<h3 class="bold">보험료 간편 조회</h3>
+							<form method="post" name="frm1">
+								<ul>
+									<li class="name">
+										<label for="rn_cust_name">이름</label>
+										<input type="text" id="rn_cust_name" name="rn_cust_name" placeholder="예)홍길동">
+									</li>			
+									<!-- <li class="sex">
+										<input type="radio" id="rn_sex1" name="rn_sex" value="M" checked="checked">
+										<label for="rn_sex1"></label>
+										<input type="radio" id="rn_sex2" name="rn_sex" value="F">
+										<label for="rn_sex2"></label>
+									</li> -->
+									<li class="birth">
+										<label for="rn_jumin1">생년월일</label>
+										<input type="text" id="rn_jumin1" name="rn_jumin1" maxlength="6" placeholder="예)800506">
+										<span class="space">-</span>
+										<span class="back_digit">
+											<input type="text" id="rn_sex" name="rn_sex" maxlength="1" placeholder="●" onKeyUp="onlyNumber(this);" onKeyPress="checkInt()">
+											● ● ● ● ● ●
+										</span>
+									</li>
+									<li class="phone">
+										<label>연락처</label>
+										<input type="text" id="cr_mphone" name="cr_mphone" maxlength="11" placeholder="예)01012345678" >
+									</li>
+								</ul>
+								
+								<div class="btn_area">
+									
+									<button class="bold" data-role="open_popup" data-send="popup_event" data-show="btn02"><span class="bold">보험료 계산</span></button>
+									<button class="bold" data-role="open_popup" data-send="popup_event" data-show="btn01"><span class="bold">상담신청</span></button>
+									
+								</div>
+							</form>	
+						</div>
+				</div>
+			</div>
+			<div class="s02">
+				<div class="inner"><img src="./images/c20200316_blank.gif" data-pc-src="./images/w20200316_aia_sect02_img01.jpg" data-mo-src="./images/m20200316_aia_sect02_img01.jpg" alt="하단문구참조">
+					<div class="hide">
+						<h3>들어놓은 보험만으론 안심할 수 없죠! 내 보험의 빈틈을 채워주는 토탈케어 건강보험</h3>
+						<ul>
+							<li>암보험만 들어놨는데 치매에 걸린다면?</li>
+							<li>들어 놓은 보험에서 보장이 안되는 병으로 쓰러진다면…?</li>
+							<li>치매는 보장되는데 뇌출혈, 뇌졸중 보장은 빠졌다면?</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="s03">
+				<div class="inner">
+					<img src="./images/c20200316_blank.gif" data-pc-src="./images/w20200316_aia_sect03_img01.jpg" data-mo-src="./images/m20200316_aia_sect03_img01.jpg" alt="하단문구참조">
+					<div class="hide">
+						<h3>나이 들어도, 아파도 삶은 계속돼야 하니까, AIA가 현실적인 대비가 되어드립니다</h3>
+						<ul>
+							<li>암 보장도, 사망원인 2,3위인 뇌혈관질환, 허혈성심장질환 진단금도 모두 보장! 2017년 사망원인통계, 통계청</li>
+							<li>질병입원시 첫날부터 상급종합병원 집중진료실 매일 최대 30만원 보장!</li>
+							<li>관절염, 간질환, 폐렴, 녹내장, 천식, 신부전 수술비 회당 50만원 보장!</li>
+							<li>중증치매 진단금 1500만원, 생활자금 매월 100만원 평생 보장! (최초 36회 보증 지급, 최종진단확정일로부터 매년 생존 시)</li>
+						</ul>
+						<p>가입 기준: (무)뉴암진단특약 50구좌, (무)뉴뇌혈관질환진단특약 10구좌, (무)뉴허혈성심장진단특약 10구좌, (무)뉴실버특정수술특약 5구좌, (무)뉴첫날부터질병입원특약 20구좌, (무)뉴 중증치매특약(갱신형) 15구좌, (무)뉴 중증치매간병생활자금특약(갱신형) 10구좌, 주계약, 특약 모두 갱신형/1형(간편심사형) *치매 관련 특약 제외 2년 미만 50% 지급, 암보장 90일 면책, 치매 관련 특약은 가입 만 2년 이후 보장 개시되며 재해 뇌손상 원인으로 최종진단된 경우 계약일부터 보장., 최초 1회한 지급 *임상 치매 평가(CDR)척도: 치매전문의가 실시하는 전반적인 인지기능 및 사회기능 등 임상치매평가, 점수가 높을수록 중증을 의미(0~5점) *CDR척도, 진단/원인 감별에 필요한 검사 결과를 기초로, 뇌영상검사 등에서 치매 소견이 확인되지 않더라도 다른 검사에 의한 종합적인 평가로 진단 가능함. 진단일로부터 90일 경과 후 치매 지속 상태를 확인하여 최종 진단 확정함</p>
+					</div>
+					<div class="slick_wrap only_mo">
+						<div class="slick_slide">
+							<div><img src="./images/m20200316_aia_sect02_s01.gif" alt="하단문구참조">
+								<div class="hide">
+									<p>암 보장도, 사망원인 2,3위인 뇌혈관질환, 허혈성심장질환 진단금도 모두 보장! (특약 가입시) 2017년 사망원인통계, 통계청</p>
+									<p>(무)뉴암진단특약,(갱신형) ,(무)뉴뇌혈관질환진단특약 (갱신형), (무)뉴허혈성심장질환진단특약 (갱신형) 가입시, 암보장 90일 면책, 최초 1회한, 2년 미만 50%보장</p>
+								</div>
+								<img src="./images/m20200316_slide_text.png" class="guide" alt="??????????">
+								<div class="hide">
+									<p>*가입 기준:의 주계약, 특약 모두 1형(간편심사형) / 10년 만기 갱신형 상품으로 갱신을 통해 최대 100세까지 보장, <span>갱신시 보험료 인상 가능</span> (단, (무)뉴 중증치매특약(갱신형), (무)뉴 중증치매간병생활자금특약(갱신형)은 90세까지 보장)</p>
+								</div>
+							</div>
+							<div><img src="./images/m20200316_aia_sect02_s02.gif" alt="하단문구참조">
+								<div class="hide">
+									<p>질병입원시 첫날부터 상급종합병원 집중진료실 매일 최대 30만원 보장! * 일반 병원: 하루 2만원 * 상급종합병원: 하루 8만원 * 집중치료실: 하루 20만원</p>
+									<p>무)뉴첫날부터질병입원 특약(갱신형) 20구좌 가입시 , 2년 미만 50% 지급 , 180일 이내 동일 질병입 원 시 최대 10일 한도로 보장 및 180일 이후 보장 재개, 지급사유 중복 발생시 각각의 보험금을 더하여 지급</p>
+								</div>
+								<img src="./images/m20200316_slide_text.png" class="guide" alt="??????????">
+								<div class="hide">
+									<p>*가입 기준:의 주계약, 특약 모두 1형(간편심사형) / 10년 만기 갱신형 상품으로 갱신을 통해 최대 100세까지 보장, <span>갱신시 보험료 인상 가능</span> (단, (무)뉴 중증치매특약(갱신형), (무)뉴 중증치매간병생활자금특약(갱신형)은 90세까지 보장)</p>
+								</div>
+							</div>
+							<div><img src="./images/m20200316_aia_sect02_s03.gif" alt="하단문구참조">
+								<div class="hide">
+									<p>중증치매 진단금 1500만원, 간병생활자금 매월 100만원 평생 보장! (최초 36회 보증 지급, 최종진단확정일로부터 매년 생존 시) (특약 가입시) * 임상 치매 평가(CDR)척도: 치매전문의가 실시하는 전반적인 인지기능 및 사회기능 등 임상치매평가, 점수가 높을수록 중증을 의미(0~5점) * CDR척도, 진단/원인 감별에 필요한 검사 결과를 기초로, 뇌영상검사 등에서 치매 소견이 확인되지 않더라도 다른 검사에 의한 종합적인 평가로 진단 가능함. 진단일로부터 90일 경과 후 치매 지속 상태를 확인하여 최종 진단 확정함</p>
+									<p>(무)뉴 중증치매특약(갱신형) 15구좌, (무)뉴 중증치매간병생활자금특약(갱신형) 10구좌, 최초 1회한 진단 확정시, 가입 만 2년 이후 보장 개시, 재해 뇌손상 원인으로 최종진단된 경우 계약일부터 보장</p>
+								</div>
+								<img src="./images/m20200316_slide_text.png" class="guide" alt="??????????">
+								<div class="hide">
+									<p>*가입 기준:의 주계약, 특약 모두 1형(간편심사형) / 10년 만기 갱신형 상품으로 갱신을 통해 최대 100세까지 보장, <span>갱신시 보험료 인상 가능</span> (단, (무)뉴 중증치매특약(갱신형), (무)뉴 중증치매간병생활자금특약(갱신형)은 90세까지 보장)</p>
+								</div>
+							</div>
+							<div><img src="./images/m20200316_aia_sect02_s04.gif" alt="하단문구참조">
+								<div class="hide">
+									<p>수술비 회당 50만원 보장! 관절염, 간질환, 폐렴, 녹내장, 천식, 신부전 (특약 가입시)</p>
+									<p>(무)뉴실버특정수술특약 (갱신형) 5구좌 가입시, 2년 미만 50% 지급</p>
+								</div>
+								<img src="./images/m20200316_slide_text.png" class="guide" alt="??????????">
+								<div class="hide">
+									<p>*가입 기준:의 주계약, 특약 모두 1형(간편심사형) / 10년 만기 갱신형 상품으로 갱신을 통해 최대 100세까지 보장, <span>갱신시 보험료 인상 가능</span> (단, (무)뉴 중증치매특약(갱신형), (무)뉴 중증치매간병생활자금특약(갱신형)은 90세까지 보장)</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="s04">
+				<div class="inner"><img src="./images/c20200316_blank.gif" data-pc-src="./images/w20200316_aia_sect04_img01.jpg" data-mo-src="./images/m20200316_aia_sect04_img01.jpg" alt="하단문구참조">
+					<div class="hide">
+						<h3>내가 필요한 보장만 쏙쏙 골라 담는 맞춤설계 각각의 플랜에 포함된 보장내용은 선택특약으로 편리하게 구성가능!</h3>
+						<p>주계약 - 뇌출혈, 급성심근경색증</p>
+						<ul>
+							<li>실버종합형 : ·뇌경색 ·허혈성 심장질환 ·입원비 ·첫날부터 입원비 ·실버특정 수술비 ·뇌혈관 질환 ·수술비 ·치매</li>
+							<li>생활비형 : ·암 생활비 ·치매 간병비 ·뇌혈관 질환 ·실버특정 수술비 ·2CI 생활비 ·뇌경색 ·허혈성 심장질환</li>
+							<li>치매형 : ·암진단비 ·치매 진단비 ·뇌혈관 질환 ·치매 간병비 ·실버특정 수술비 ·허혈성 심장질환</li>
+							<li>진단비형 : ·암 진단비 ·뇌경색 ·허혈성 심장질환 ·치매 진단비 ·뇌혈관 질환</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="s05">
+				<div class="inner"><img src="./images/c20200316_blank.gif" data-pc-src="./images/w20200316_aia_sect05_img01.jpg" data-mo-src="./images/m20200316_aia_sect05_img01.jpg" alt="하단문구참조">
+					<div class="hide">
+						<h3>나이들수록 필요한 보험, 정작 나이먹으면 가입하기 어렵다?</h3>
+						<p>40세에서 75세까지 암을 앓았어도, 지병이 있어도 (최근 5년 이내 제외) 3가지 질문의 간편심사만 통과하면 가입 가능!</p>
+						<p>3개월 이내 추가 검사 등의 의사 소견이나 2년 이내 입원, 수술 이력이 없고 5년 이내 암 치료 이력이 없는 경우 *치매 특약 가입시 2가지 질문 추가됩니다.</p>
+						<p>1년 이내 치매 또는 경도 이상의 인지기능장애로 추가 검사등의 의사소견이나 5년 이내 치매 관련 질병 치료 이력이 없는 경우 * 당사의 인수 기준에 따라 가입이 어려운 경우도 있으니 자세한 사항은 전문 상담원에게 문의해 주십시오</p>
+					</div>
+				</div>
+			</div>
+			<div class="s06">
+				<div class="inner"><img src="./images/c20200316_blank.gif" data-pc-src="./images/w20200316_aia_sect06_img01.jpg" data-mo-src="./images/m20200316_aia_sect06_img01.jpg" alt="하단문구참조">
+					<div class="hide">
+						<h3>건강할 때도, 아플 때도, AIA가 당신의 건강을 지켜드립니다! 월 보험료 25,000원이상 가입 고객에게 드리는 AIA 헬스케어 서비스</h3>
+						<p>*상기 서비스는 제공업체의 사정에 따라 변경될 수 있습니다.</p>
+						<ul>
+							<li>건강을 위해 Pre-Care : ·의료진과의 실시간 건강 상담 ·매월 건강정보 제공 ·가족까지 건강검진 우대 서비스</li>
+							<li>마음까지 Mind-Care : ·전화 심리상담 서비스 ·심리상담센터 대면 심리상담도 우대</li>
+							<li>행복한 노년 Senior-Care : ·매월 위로가 되는 글 선정하여 문자 발송 ·온라인 치매 자가진단 서비스 ·시니어 질환 맞춤 진료예약 및 안내 서비스 ·치매 진단시, GPS 추적 디바이스 제공</li>
+							<li>큰 병에 걸려도, Post-Care : ·대형병원 진료예약 및 전문의 안내 ·이동 지원, 차량 에스코트 ·해외 유명 의료기관 2차 소견 서비스 ·간병인 지원 & 전문 간호사 방문 상담! ·심장질환/뇌혈관질환 집중 서비스</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="s07">
+				<div class="inner">
+					<div class="text_box">
+						<h3>(무)백세시대 꼭하나 건강보험(갱신형)<span class="bold">내 보험료는 얼마일까?</span></h3>
+						<p class="bold">080-200-6060</p>
+					</div>
+					<div class="db_box">
+						<form method="post" name="frm2">
+							<ul>
+								<li class="name">
+									<label for="rn_cust_name2">이름</label>
+									<input type="text" id="rn_cust_name2" name="rn_cust_name" placeholder="예)홍길동">
+								</li>
+								<!-- <li class="sex">
+									<input type="radio" id="rn_sex3" name="rn_sex" value="M" checked="checked">
+									<label for="rn_sex3"></label>
+									<input type="radio" id="rn_sex4" name="rn_sex" value="F">
+									<label for="rn_sex4"></label>
+								</li> -->
+								<li class="birth">
+									<label for="rn_jumin2">생년월일</label>
+									<input type="text" id="rn_jumin2" name="rn_jumin1" maxlength="6" placeholder="예)800506">
+									<span class="space">-</span>
+                                    <span class="back_digit">
+                                        <input type="text" id="rn_sex" name="rn_sex" maxlength="1" placeholder="●" onKeyUp="onlyNumber(this);" onKeyPress="checkInt()">
+                                        ● ● ● ● ● ●
+                                    </span>
+								</li>
+								<li class="phone">
+									<label>연락처</label>
+									<input type="text" id="cr_mphone2" name="cr_mphone" maxlength="11" placeholder="예)01012345678">
+								</li>
+							</ul>
+							
+							<div class="btn_area">
+								
+								<button class="bold" data-role="open_popup" data-send="popup_event" data-show="btn01"><span class="bold">상담 신청하기</span></button>
+								
+							</div>
+						</form>
+					</div>
+				</div>
+				<a href="tel:080-200-6060" class="tel only_mo"><span class="bold">080-200-6060</span></a>
+            </div>
+            <!-- guide_area -->
+            <div class="guide_area">
+                <div class="wrap">
+                    <div class="tab">
+						<p class="title only_mo" ><button>가입시 확인사항</button></p>
+                        <div class="subTitle only_pc">
+                            <div class="wrap">
+                                <button><img src="./images/w20200316_guide_title01.png" alt="가입하기 전 확인하세요."></button>
+                            </div>
+						</div>
+                        <div class="img">
+                            <img src="./images/c20200316_blank.gif" data-pc-src="./images/w_guaranteedissue_100age.gif" data-mo-src="./images/m_guaranteedissue_100age.gif" alt="가입시 유의사항 이미지">
+							<!-- 20200803 : 추가 -->
+							<div class="btn">
+								<a href="https://www.aia.co.kr/ko/disclosure/our-products/insurance-product-list.html" target="_blank" >
+									<img src="./images/c20200617_blank.gif" data-pc-src="./images/w_guaranteedissue_bt.gif" data-mo-src="./images/m_guaranteedissue_bt.gif" alt="보호금융상품등록부">
+								</a>
+							</div>
+							<!-- // 20200803 : 추가 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end : guide_area -->
+		</div>
+		<div class="footer">
+			<div class="inner">
+				<img src="./images/c20200316_blank.gif" data-pc-src="./images/w_footer.gif" data-mo-src="./images/m_footer.gif" alt="하단문구참조">
+				<a class="pi-link" href="https://www.aia.co.kr/ko/index/pi-processing.html" target="_blank" title="개인정보처리방침"></a>
+
+
+				<div class="hide">
+					<address>AIA생명보험 주식회사 대표이사 : 피터 정 사업자등록번호 711-87-00663<br>소재지 : 서울시 중구 통일로 2길 16 (순화동 216) AIA Tower 고객센터 1588-9898<br>Copyright ⓒ 2020, AIA Group Limited and its subsidiaries, All rights reserved.</address>
+				</div>
+            </div>
+        </div>
+
+		<!-- 20200803 : 추가 -->
+		<!-- 플로팅바 -->
+		<div class="floating only_mo" >
+			<div class="layer">
+				<div class="db_box">
+					<form method="post" action="" name="frm3">
+						<ul>
+							<li class="name">
+								<input type="text" id="rn_cust_name3" name="rn_cust_name" placeholder="이름" >
+							</li>
+							<li class="phone">
+								<input type="text" id="cr_mphone3" name="cr_mphone" maxlength="11" placeholder="휴대폰번호(’-’없이 입력)">
+							</li>
+							<!-- <li class="sex">
+								<input type="radio" id="rn_sex5" name="rn_sex" value="M" checked="checked">
+								<label for="rn_sex5">남</label>
+								<input type="radio" id="rn_sex6" name="rn_sex" value="F">
+								<label for="rn_sex6">여</label>
+							</li> -->
+							<li class="birth">
+								<input type="text" id="rn_jumin3" name="rn_jumin1" maxlength="6" placeholder="생년월일 (예 730804)">
+								<span class="space">-</span>
+								<span class="back_digit">
+									<input type="text" id="rn_sex" name="rn_sex" maxlength="1" placeholder="●" onKeyUp="onlyNumber(this);" onKeyPress="checkInt()">
+									● ● ● ● ● ●
+								</span>
+							</li>
+						</ul>
+						
+
+						<div class="btn_area calc">
+							
+							<button data-role="open_popup" data-send="popup_event" data-show="btn02"><!-- 플로팅바 "보험료 결과보기" 버튼 -->
+							
+								<img src="./images/m20200803_aia_float_btn01.png" alt="보험료 결과보기">
+							</button>
+							<div class="result">
+								<img src="./images/m20200803_aia_float_text01.png" alt="">
+								<input type="text" class="user_name" id="user_name3" readonly style="padding: 0 5px;">
+								<input type="text" class ="user_premium" name="calcVal3" id="calcVal5" readonly style="padding: 0 5px;">
+							</div>
+						</div>
+	
+						<div class="btn_area consult">
+							
+							<button data-role="open_popup" data-send="popup_event" data-show="btn01"><!-- 플로팅바 "상담 신청하기" 버튼 -->
+							
+								<img src="./images/m20200803_aia_float_btn02.png" alt="상담 신청하기">
+							</button>
+							<div class="result">
+								<img src="" alt="">
+							</div>
+						</div>
+					</form>
+
+				</div>	
+				
+				<div class="btn">
+					<button class="btn_toggle">열기/닫기</button>
+				</div>
+			</div>
+			
+			<div class="inner">
+				<ul>
+					<li><a href="#" class="btn01"><img src="./images/m20200803_aia_db_btn01.png" alt="내 보험료 계산"></a></li>
+					<li><a href="#" class="btn02"><img src="./images/m20200803_aia_db_btn02.png" alt="무료 상담 신청"></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- // 플로팅바 -->
+		<!-- // 20200803 : 추가 -->
+
+				 
+		<!-- popup : 개인정보 동의 팝업 -->
+		<div class="popup agree" data-receive="popup_event">
+			<div class="mask"></div>
+			<div class="popup_content">
+				<div class="img">
+					<img src="./images/c20210311_blank.gif" data-pc-src="./images/w20210311_popup_title01.png" data-mo-src="./images/m20210311_popup_title01.png" alt="AIA가 고객님만을 위한 맞춤 보장을 설계 중입니다" >
+				</div>
+				<div class="wrap">
+					<div class="agree_area">
+						<div class="agree">
+							<div>
+								<input type="checkbox" class="checkbox" id="cust_uyn1" name="cust_uyn1">
+								<label for="cust_uyn1"><img src="./images/c20210311_blank.gif" data-pc-src="./images/w20210311_popup_text01.png" data-mo-src="./images/m20210311_popup_text01.png" alt="개인정보 수집 및 이용 동의 (필수)"></label>
+								<div class="toggle"><img src="./images/20221111_popup_agree01.png" alt="" ></div>
+							</div>
+                            <div>
+                                <input type="checkbox" class="checkbox" id="cust_eyn1" name="cust_eyn1" checked>
+                            </div>
+						</div>
+						<button class="all_check" > <!-- 내보험료 계산 / 무료상담신청 클릭에 따라 calc() / comp() 온클릭 이벤트 생성함. -->
+							<img src="./images/c20210311_blank.gif" data-pc-src="./images/w20210311_popup_btn01.png" data-mo-src="./images/m20210311_popup_btn01.png" alt="전체 동의하기" >
+						</button>
+					</div>
+				</div>
+
+				<button class="btn_close">
+					<img src="./images/c20210311_blank.gif" data-pc-src="./images/w20210311_popup_btn_close.png" data-mo-src="./images/m20210311_popup_btn_close.png" alt="팝업 닫기" >
+				</button>
+			</div>
+		</div>
+		<!-- // popup : 개인정보 동의 팝업 -->	
+	
+		
+        <!-- popup : type02 : 상담 신청 -->
+		<div class="popup type02 complete">
+			<div class="mask"></div>
+			<div class="popup_content">
+				<h2 class="bold">보험상담 신청이<br><span>완료</span>되었습니다</h2>
+				<p class="text bold">잠시 후 <span>전문상담원</span>이 보장내역과 보험료를
+					<br>친절하게 설명해드립니다. (평일기준)</p>
+				<p class="guide" id="datep1">XXXX-XX-XX XX시 XX분 AIA생명 마케팅수신동의완료</p>
+				<button class="btn_close"><img src="./images/c20200316_aia_pop_btn_close.png" alt="팝업 닫기"></button>
+			</div>
+        </div>
+        
+        <!-- popup : type02 : 보험료 계산 -->
+		<div class="popup type02 calc">
+			<div class="mask"></div>
+			<div class="popup_content">
+				<h2 class="bold"><span id="user_name">XXX</span> 고객님의 보험료는</h2>
+				<div class="calc_area bold">월 <span>[<input type="text" readonly name="calcVal3" id="calcVal3" />]</span>원</div>
+				<p class="text bold">잠시 후 <span>전문상담원</span>이 보장내역과 보험료를
+					<br>친절하게 설명해드립니다. (평일기준)</p>
+				<p class="guide" id="datep2">XXXX-XX-XX XX시 XX분 AIA생명 마케팅수신동의완료</p>
+				<button class="btn_close"><img src="./images/c20200316_aia_pop_btn_close.png" alt="팝업 닫기"></button>
+			</div>
+		</div>
+		
+		
+        <!-- popup : type02 : 보험료 계산 불가 -->
+		<div class="popup type02 nocalc">
+			<div class="mask"></div>
+			<div class="popup_content">
+				<h2 class="bold"><span id="user_name_nc">XXX</span> 고객님의 보험료는</h2>
+				<div class="calc_area bold">현재 계산이 불가합니다.</div>
+				<p class="text bold"><span>상담</span>을 통해 자세한 사항을 확인하세요.</p>
+				<p class="guide" id="datep3">XXXX-XX-XX XX시 XX분 AIA생명 마케팅수신동의완료</p>
+				<button class="btn_close"><img src="./images/c20200316_aia_pop_btn_close.png" alt="팝업 닫기"></button>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
